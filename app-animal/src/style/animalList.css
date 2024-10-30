@@ -1,0 +1,58 @@
+h3 {
+    font-size: 36px;
+    margin: 20px 0;
+    color: var(--text-color);
+  }
+  
+  li {
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(253, 79, 79, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  li:hover {
+    transform: scale(1.05);
+    background-color: var(--hover-color);
+  }
+  
+  li img {
+    border-radius: 8px;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  li p {
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  
+  .animal-toggle-buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  
+  .toggle-button {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .toggle-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .toggle-button.active {
+    border: 2px solid var(--text-color);
+    border-radius: 8px;
+    padding: 4px;
+  }
+  

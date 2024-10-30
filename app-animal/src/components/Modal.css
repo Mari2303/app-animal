@@ -1,37 +1,70 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Más oscuro para un efecto más dramático */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px; /* Aumentar el padding para más espacio */
+  border-radius: 12px; /* Esquinas más redondeadas */
+  max-width: 400px;
+  width: 90%; /* Asegurarse de que se adapte a dispositivos pequeños */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  animation: fadeIn 0.3s ease; /* Animación de entrada */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* Desplazamiento hacia arriba */
   }
-  
-  .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-    position: relative;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  img {
-    max-width: 100%;
-    border-radius: 8px;
-  }
-  
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #ff4d4f; /* Color rojo para el botón de cierre */
+  cursor: pointer;
+  transition: color 0.3s; /* Suave transición de color */
+}
+
+.close-button:hover {
+  color: #ff1a1a; /* Color más intenso al pasar el mouse */
+}
+
+img {
+  max-width: 100%;
+  border-radius: 12px; /* Esquinas más redondeadas para la imagen */
+  margin-top: 10px; /* Espacio superior */
+}
+
+/* Estilo de texto dentro del modal */
+.modal-content h2 {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+  color: #355070; /* Color de texto */
+  font-family: 'Arial', sans-serif;
+}
+
+.modal-content p {
+  font-size: 16px;
+  color: #666; /* Color más suave para el texto */
+  line-height: 1.5; /* Mejorar la legibilidad */
+}

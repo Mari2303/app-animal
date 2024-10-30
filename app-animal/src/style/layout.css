@@ -1,0 +1,15 @@
+.contenedor {
+    width: auto;
+    background: var(--primary-color);
+    padding: 40px;
+    border-radius: 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
