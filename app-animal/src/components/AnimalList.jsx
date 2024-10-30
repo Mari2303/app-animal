@@ -1,61 +1,86 @@
 import React, { useState, useEffect } from 'react';
 import { fetchCats } from '../services/catService';
-import { fetchDogs } from '../services/dogService';
+import { fetchDogs } from '../services/dogService'; 
 import Modal from './Modal';
 
 function AnimalList() {
-  const [cats, setCats] = useState([]);
-  const [dogs, setDogs] = useState([]);
-  const [selectedAnimal, setSelectedAnimal] = useState(null); // Estado para el animal seleccionado
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para abrir/cerrar el modal
+    const [cats, setCats] = useState([]);
+    const [dogs, setDogs] = useState([]); 
+    const [selectedAnimal, setSelectedAnimal] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showCats, setShowCats] = useState(true);  
+    useEffect(() => {
+        const loadAnimals = async () => {
+            const catData = await fetchCats(10);
+            const dogData = await fetchDogs(10);  
+            setCats(catData);
+            setDogs(dogData);
+        };
 
-  useEffect(() => {
-    const loadAnimals = async () => {
-      const catData = await fetchCats();
-      const dogData = await fetchDogs();
-      setCats(catData);
-      setDogs(dogData);
+        loadAnimals();
+    }, []);
+
+    const openModal = (animal) => {
+        setSelectedAnimal(animal);
+        setIsModalOpen(true);
     };
 
-    loadAnimals();
-  }, []);
+    const closeModal = () => {
+        setSelectedAnimal(null);
+        setIsModalOpen(false);
+    };
 
-  const openModal = (animal) => {
-    setSelectedAnimal(animal);
-    setIsModalOpen(true);
-  };
+    const toggleShowCats = () => {
+        setShowCats(true);
+    };
 
-  const closeModal = () => {
-    setSelectedAnimal(null);
-    setIsModalOpen(false);
-  };
+    const toggleShowDogs = () => {
+        setShowCats(false);
+    };
 
-  return (
-    <div>
-      <h2>Adoptable Cats</h2>
-      <ul>
-        {cats.map((cat) => (
-          <li key={cat.id} onClick={() => openModal(cat)}>
-            <h3>{cat.name}</h3>
-            <img src={cat.image?.url} alt={cat.name} width="100" />
-          </li>
-        ))}
-      </ul>
+    return (
+        <div>
+          
+            <div>
+                <button onClick={toggleShowCats}>Gatos</button>
+                <button onClick={toggleShowDogs}>Perros</button>
+            </div>
+            
+            {showCats ? (
+                <>
+                    <h3>Gatos</h3>
+                    <ul>
+                        {cats.map((cat) => (
+                            <li key={cat.id} onClick={() => openModal(cat)}>
+                                {cat.url ? ( 
+                                    <img src={cat.url} alt="Cat" width="200" />
+                                ) : (
+                                    <p>Imagen no disponible</p>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            ) : (
+                <>
+                    <h3>Perros</h3>
+                    <ul>
+                        {dogs.map((dog) => (
+                            <li key={dog.id} onClick={() => openModal(dog)}>
+                                {dog.image ? ( 
+                                    <img src={dog.image.url} alt="Dog" width="200" />
+                                ) : (
+                                    <p>Imagen no disponible</p>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
 
-      <h2>Adoptable Dogs</h2>
-      <ul>
-        {dogs.map((dog) => (
-          <li key={dog.id} onClick={() => openModal(dog)}>
-            <h3>{dog.name}</h3>
-            <img src={dog.image?.url} alt={dog.name} width="100" />
-          </li>
-        ))}
-      </ul>
-
-      {/* Modal Component */}
-      <Modal isOpen={isModalOpen} onClose={closeModal} animal={selectedAnimal} />
-    </div>
-  );
+            <Modal isOpen={isModalOpen} onClose={closeModal} animal={selectedAnimal} />
+        </div>
+    );
 }
 
 export default AnimalList;

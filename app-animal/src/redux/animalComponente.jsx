@@ -1,4 +1,3 @@
-// redux/animalComponente.jsx
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchCats } from '../services/catService';
 import { fetchDogs } from '../services/dogService';
