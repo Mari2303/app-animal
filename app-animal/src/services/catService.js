@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'https://api.thecatapi.com/v1/images/search';
+const API_URL = 'https://api.thecatapi.com/v1/breeds';
 const API_KEY = 'live_KvrgoQeUEityPqRTNqjoOse42NwkfybR1h3VgjyjM4Tki5F13jC1maa2HOdVbQKj'; 
 
-export const fetchCats = async (limit = 20) => {
+export const fetchCats = async () => {
     try {
-        const response = await axios.get(`${API_URL}?limit=${limit}`, {
+        const response = await axios.get(API_URL, {
             headers: {
                 'x-api-key': API_KEY,
             },
@@ -16,4 +16,3 @@ export const fetchCats = async (limit = 20) => {
         return [];
     }
 };
-

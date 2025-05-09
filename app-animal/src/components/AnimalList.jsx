@@ -61,38 +61,38 @@ function AnimalList() {
 
             {view === 'home' && (
                 <div className="home-content">
-                    <h2>¡Bienvenido a nuestra página de adopción de mascotas!</h2>
-                    <p>Explora los gatos y perros disponibles para adopción haciendo clic en los íconos.</p>
+                    <h2>Welcome to our pet adoption page!</h2>
+                    <p> Explore the cats and dogs available for adoption by clicking on the icons.</p>
                     <div className="animal-selections">
                         <div onClick={() => setView('cats')} className="animal-option">
                             <img src={catButtonImg} alt="Icono Gato" />
-                            <p>Ver gatos</p>
+                            <p>See cats</p>
                         </div>
                         <div onClick={() => setView('dogs')} className="animal-option">
                             <img src={dogButtonImg} alt="Icono Perro" />
-                            <p>Ver perros</p>
+                            <p>See dogs</p>
                         </div>
                     </div>
                 </div>
             )}
+{view === 'cats' && (
+    <div className="contenedor">
+        <h3>Gatos</h3>
+        <ul>
+            {cats.map((cat) => (
+                <li key={cat.id} onClick={() => openModal(cat)}>
+                    {cat.image?.url ? (
+                        <img src={cat.image.url} alt={cat.name} />
+                    ) : (
+                        <p>Imagen no disponible</p>
+                    )}
+                    <p>{cat.name}</p>
+                </li>
+            ))}
+        </ul>
+    </div>
+)}
 
-            {view === 'cats' && (
-                <div className="contenedor">
-                    <h3>Gatos</h3>
-                    <ul>
-                        {cats.map((cat) => (
-                            <li key={cat.id} onClick={() => openModal(cat)}>
-                                {cat.url ? (
-                                    <img src={cat.url} alt="Cat" />
-                                ) : (
-                                    <p>Imagen no disponible</p>
-                                )}
-                                <p>{cat.name }</p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
 
             {view === 'dogs' && (
                 <div className="contenedor">
